@@ -1,20 +1,20 @@
 /* css/style.css */
 
-/* --- Variabel CSS --- */
+/* --- Variabel CSS --- (tetap sama) */
 :root {
-    --primary-color: #3498db; /* Biru cerah, sedikit lebih modern */
-    --secondary-color: #6c757d; /* Abu-abu netral */
-    --accent-color: #2ecc71; /* Hijau segar */
-    --text-color: #333; /* Abu-abu gelap untuk teks */
-    --light-text-color: #f8f9fa; /* Putih keabu-abuan untuk teks terang */
-    --background-color: #ecf0f1; /* Latar belakang halaman yang lebih lembut */
-    --card-background: #ffffff; /* Latar belakang card/box */
-    --border-color: #e0e0e0; /* Warna border yang lebih halus */
-    --shadow-light: rgba(0, 0, 0, 0.1); /* Bayangan ringan yang lebih jelas */
-    --shadow-medium: rgba(0, 0, 0, 0.15); /* Bayangan sedang */
+    --primary-color: #3498db;
+    --secondary-color: #6c757d;
+    --accent-color: #2ecc71;
+    --text-color: #333;
+    --light-text-color: #f8f9fa;
+    --background-color: #ecf0f1;
+    --card-background: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
 }
 
-/* --- Global Styles --- */
+/* --- Global Styles --- (tetap sama) */
 * {
     margin: 0;
     padding: 0;
@@ -26,7 +26,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    overflow-x: hidden; /* Mencegah scroll horizontal yang tidak diinginkan */
+    overflow-x: hidden;
 }
 
 .container {
@@ -36,14 +36,20 @@ body {
 }
 
 section {
-    padding: 80px 0; /* Padding lebih besar untuk pemisahan section */
-    transition: background-color 0.3s ease; /* Transisi jika background berubah */
+    padding: 80px 0;
+    transition: background-color 0.3s ease;
 }
+
+/* Penting: Sesuaikan padding-top main untuk mengatasi fixed header */
+main {
+    padding-top: 85px; /* Sesuaikan ini dengan tinggi header Anda (misal: 85px jika padding 20px atas-bawah + tinggi font) */
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
     margin-bottom: 20px;
-    font-weight: 700; /* Font lebih tebal untuk heading */
+    font-weight: 700;
 }
 
 ul {
@@ -52,28 +58,28 @@ ul {
 
 .btn {
     display: inline-block;
-    padding: 12px 30px; /* Padding lebih besar untuk tombol */
-    border-radius: 30px; /* Sudut lebih membulat */
+    padding: 12px 30px;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transisi lebih halus */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     border: none;
     font-size: 1rem;
-    letter-spacing: 0.5px; /* Sedikit spasi huruf */
-    text-transform: uppercase; /* Huruf besar semua */
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .btn.primary-btn {
     background-color: var(--primary-color);
     color: white;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); /* Bayangan warna primer */
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
 .btn.primary-btn:hover {
-    background-color: #2980b9; /* Lebih gelap */
-    transform: translateY(-3px); /* Naik sedikit */
-    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6); /* Bayangan lebih besar */
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
 }
 
 .btn.secondary-btn {
@@ -98,18 +104,17 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    transition: transform 0.3s ease-out, background-color 0.3s ease;
+    /* transition: transform 0.3s ease-out, background-color 0.3s ease; */ /* Hapus ini */
 }
 
-header.hidden {
-    transform: translateY(-100%);
-}
+/* header.hidden { transform: translateY(-100%); } */ /* Hapus ini */
+
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Untuk wrapping di mobile */
 }
 
 .logo a {
@@ -177,7 +182,69 @@ header nav ul li a:hover {
     box-shadow: 0 2px 8px rgba(46, 204, 113, 0.4);
 }
 
-/* --- Hero Section --- */
+/* --- Menu Toggle Button (Hamburger) --- */
+.menu-toggle {
+    display: none; /* Default tersembunyi, hanya muncul di mobile */
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+    order: 3; /* Pastikan tombol di paling kanan di mobile */
+}
+
+/* --- Mobile Navigation Styling --- */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row; /* Kembali ke row untuk menempatkan logo dan toggle */
+        justify-content: space-between; /* Spasi antara logo, nav, dan cart */
+        align-items: center;
+        flex-wrap: nowrap; /* Cegah wrap di container utama header */
+    }
+
+    header nav {
+        order: 4; /* Pindahkan nav ke baris baru, paling bawah */
+        flex-basis: 100%; /* Ambil lebar penuh */
+        max-height: 0; /* Sembunyikan secara default */
+        overflow: hidden;
+        transition: max-height 0.4s ease-out; /* Animasi buka/tutup */
+        background-color: var(--card-background); /* Background untuk nav yang terbuka */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border-top: 1px solid var(--border-color);
+    }
+
+    header nav.active {
+        max-height: 300px; /* Cukup tinggi untuk menampilkan semua link */
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 0; /* Hapus gap di sini */
+        padding: 15px 0; /* Padding vertikal di dalam nav */
+    }
+
+    header nav ul li a {
+        padding: 12px 20px; /* Padding untuk setiap item menu */
+        border-bottom: 1px solid var(--border-color);
+        display: block; /* Agar link mengambil lebar penuh */
+    }
+    header nav ul li:last-child a {
+        border-bottom: none;
+    }
+
+    .cart-icon {
+        order: 2; /* Cart icon di sebelah kanan logo */
+        margin-left: auto; /* Dorong ke kanan */
+        margin-right: 20px; /* Spasi dari menu toggle */
+    }
+
+    .menu-toggle {
+        display: block; /* Tampilkan tombol toggle di mobile */
+    }
+}
+
+
+/* --- Sisa CSS di bawah ini tetap sama seperti sebelumnya --- */
+
+/* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('../images/hero-bg.jpg') no-repeat center center/cover;
@@ -190,11 +257,7 @@ header nav ul li a:hover {
     padding: 20px;
     position: relative;
     overflow: hidden;
-    /* Offset untuk fixed header */
-    padding-top: 100px; /* Sesuaikan dengan tinggi header yang stabil */
-    margin-top: -85px; /* Mengkompensasi padding-top header + tinggi defaultnya */
 }
-
 .hero-section::before {
     content: '';
     position: absolute;
@@ -207,12 +270,10 @@ header nav ul li a:hover {
     pointer-events: none;
     z-index: 1;
 }
-
 .hero-section .container {
     position: relative;
     z-index: 2;
 }
-
 .hero-section h1 {
     font-size: 4.5rem;
     margin-bottom: 25px;
@@ -220,7 +281,6 @@ header nav ul li a:hover {
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     line-height: 1.2;
 }
-
 .hero-section p {
     font-size: 1.5rem;
     margin-bottom: 40px;
@@ -231,23 +291,19 @@ header nav ul li a:hover {
     margin-right: auto;
 }
 
-/* --- Product Carousel Section --- */
+/* Product Carousel Section */
 .product-carousel-section {
     padding: 80px 0;
     background-color: var(--card-background);
     text-align: center;
     box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
-    /* Offset untuk fixed header */
-    padding-top: 100px;
 }
-
 .product-carousel-section h2 {
     font-size: 3rem;
     margin-bottom: 50px;
     color: var(--primary-color);
     position: relative;
 }
-
 .product-carousel-section h2::after {
     content: '';
     position: absolute;
@@ -259,7 +315,6 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .carousel-container {
     position: relative;
     max-width: 960px;
@@ -269,13 +324,11 @@ header nav ul li a:hover {
     box-shadow: 0 10px 30px var(--shadow-medium);
     background-color: var(--card-background);
 }
-
 .carousel-slide {
     display: flex;
     transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     width: 100%;
 }
-
 .carousel-item {
     flex: 0 0 100%;
     box-sizing: border-box;
@@ -286,7 +339,6 @@ header nav ul li a:hover {
     justify-content: center;
     align-items: center;
 }
-
 .carousel-item img {
     max-width: 60%;
     height: 280px;
@@ -296,24 +348,20 @@ header nav ul li a:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
-
 .carousel-item img:hover {
     transform: scale(1.03);
 }
-
 .carousel-item h3 {
     font-size: 2.2rem;
     margin-bottom: 15px;
     color: var(--text-color);
 }
-
 .carousel-item .price {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--accent-color);
     margin-bottom: 30px;
 }
-
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -329,28 +377,23 @@ header nav ul li a:hover {
     z-index: 10;
     opacity: 0.8;
 }
-
 .carousel-btn:hover {
     background-color: rgba(0, 0, 0, 0.8);
     transform: translateY(-50%) scale(1.1);
     opacity: 1;
 }
-
 .carousel-btn.prev-btn {
     left: 15px;
 }
-
 .carousel-btn.next-btn {
     right: 15px;
 }
-
 .carousel-dots {
     margin-top: 30px;
     display: flex;
     justify-content: center;
     gap: 12px;
 }
-
 .dot {
     height: 14px;
     width: 14px;
@@ -360,7 +403,6 @@ header nav ul li a:hover {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .dot.active {
     background-color: var(--primary-color);
     transform: scale(1.2);
@@ -370,14 +412,11 @@ header nav ul li a:hover {
     transform: scale(1.1);
 }
 
-/* --- Product Listing (Untuk halaman products.html) --- */
+/* Product Listing (Untuk halaman products.html) */
 .product-listing {
     padding: 80px 0;
     background-color: var(--background-color);
-    /* Offset untuk fixed header */
-    padding-top: 100px;
 }
-
 .product-listing h2 {
     text-align: center;
     margin-bottom: 50px;
@@ -396,7 +435,6 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .category-filter {
     text-align: center;
     margin-bottom: 40px;
@@ -405,7 +443,6 @@ header nav ul li a:hover {
     flex-wrap: wrap;
     gap: 15px;
 }
-
 .category-filter .filter-btn {
     background-color: var(--secondary-color);
     color: white;
@@ -414,9 +451,8 @@ header nav ul li a:hover {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-weight: 500;
-    border: none; /* Pastikan tidak ada border default */
+    border: none;
 }
-
 .category-filter .filter-btn:hover {
     background-color: #5a6268;
     transform: translateY(-2px);
@@ -426,14 +462,11 @@ header nav ul li a:hover {
     box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
     transform: translateY(-2px);
 }
-
-
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 35px;
 }
-
 .product-card {
     background-color: var(--card-background);
     border-radius: 10px;
@@ -447,12 +480,10 @@ header nav ul li a:hover {
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .product-card:hover {
     transform: translateY(-7px);
     box-shadow: 0 15px 30px var(--shadow-medium);
 }
-
 .product-card img {
     max-width: 100%;
     height: 220px;
@@ -464,21 +495,17 @@ header nav ul li a:hover {
 .product-card:hover img {
     transform: scale(1.05);
 }
-
-
 .product-card h3 {
     font-size: 1.5rem;
     margin-bottom: 12px;
     color: var(--text-color);
 }
-
 .product-card .price {
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--accent-color);
     margin-bottom: 25px;
 }
-
 .product-card .add-to-cart-btn {
     background-color: var(--primary-color);
     color: white;
@@ -489,23 +516,18 @@ header nav ul li a:hover {
     width: 100%;
     max-width: 200px;
     font-weight: 600;
-    border: none; /* Pastikan tidak ada border default */
+    border: none;
 }
-
 .product-card .add-to-cart-btn:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
 }
 
-
-/* --- Shopping Cart (Untuk halaman cart.html) --- */
+/* Shopping Cart (Untuk halaman cart.html) */
 .shopping-cart {
     padding: 80px 0;
     background-color: var(--background-color);
-    /* Offset untuk fixed header */
-    padding-top: 100px;
 }
-
 .shopping-cart h2 {
     text-align: center;
     margin-bottom: 50px;
@@ -524,7 +546,6 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .cart-items {
     background-color: var(--card-background);
     border-radius: 10px;
@@ -532,7 +553,6 @@ header nav ul li a:hover {
     padding: 30px;
     margin-bottom: 40px;
 }
-
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -540,17 +560,14 @@ header nav ul li a:hover {
     padding: 20px 0;
     border-bottom: 1px solid var(--border-color);
 }
-
 .cart-item:last-child {
     border-bottom: none;
 }
-
 .cart-item-info {
     display: flex;
     align-items: center;
     gap: 25px;
 }
-
 .cart-item-info img {
     width: 90px;
     height: 90px;
@@ -558,26 +575,22 @@ header nav ul li a:hover {
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
-
 .cart-item-details h4 {
     margin: 0;
     font-size: 1.3rem;
     color: var(--text-color);
 }
-
 .cart-item-details p {
     margin: 8px 0 0;
     font-size: 1.1rem;
     color: var(--secondary-color);
     font-weight: 500;
 }
-
 .cart-item-actions {
     display: flex;
     align-items: center;
     gap: 20px;
 }
-
 .cart-item-actions .item-quantity {
     width: 70px;
     padding: 10px;
@@ -587,7 +600,6 @@ header nav ul li a:hover {
     font-size: 1.1rem;
     color: var(--text-color);
 }
-
 .cart-item-actions .remove-item-btn {
     background-color: #e74c3c;
     color: white;
@@ -598,12 +610,10 @@ header nav ul li a:hover {
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-weight: 500;
 }
-
 .cart-item-actions .remove-item-btn:hover {
     background-color: #c0392b;
     transform: translateY(-2px);
 }
-
 #empty-cart-message {
     text-align: center;
     font-style: italic;
@@ -611,7 +621,6 @@ header nav ul li a:hover {
     padding: 30px;
     font-size: 1.1rem;
 }
-
 .cart-summary {
     background-color: var(--card-background);
     border-radius: 10px;
@@ -622,7 +631,6 @@ header nav ul li a:hover {
     font-weight: 700;
     color: var(--text-color);
 }
-
 .cart-summary #cart-total {
     color: var(--primary-color);
     margin-left: 15px;
@@ -633,14 +641,12 @@ header nav ul li a:hover {
 }
 
 
-/* --- Auth Section (Untuk login.html dan signup.html) --- */
+/* Auth Section (Untuk login.html dan signup.html) */
 .auth-section {
     padding: 80px 0;
     background-color: var(--background-color);
-    padding-top: 100px; /* Offset untuk fixed header */
-    text-align: center; /* Untuk menengahkan form */
+    text-align: center;
 }
-
 .auth-section h2 {
     font-size: 3rem;
     margin-bottom: 50px;
@@ -659,9 +665,8 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .auth-form {
-    max-width: 450px; /* Lebih kecil untuk form login/signup */
+    max-width: 450px;
     margin: 0 auto;
     background-color: var(--card-background);
     padding: 40px;
@@ -669,7 +674,6 @@ header nav ul li a:hover {
     box-shadow: 0 8px 20px var(--shadow-light);
     text-align: left;
 }
-
 .auth-form .auth-link {
     margin-top: 20px;
     text-align: center;
@@ -685,15 +689,13 @@ header nav ul li a:hover {
 }
 
 
-/* --- About Section --- */
+/* About Section */
 .about-section {
     background-color: var(--card-background);
     padding: 80px 0;
     text-align: center;
     box-shadow: 0 2px 15px var(--shadow-light);
-    padding-top: 100px; /* Offset untuk fixed header */
 }
-
 .about-section h2 {
     font-size: 3rem;
     margin-bottom: 30px;
@@ -711,7 +713,6 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .about-section p {
     max-width: 800px;
     margin: 0 auto 20px auto;
@@ -719,12 +720,12 @@ header nav ul li a:hover {
     line-height: 1.8;
     color: var(--text-color);
 }
-.about-section ul { /* Untuk daftar di dalam about */
+.about-section ul {
     max-width: 800px;
     margin: 20px auto 30px auto;
     text-align: left;
-    list-style: disc; /* Menggunakan bullet point default */
-    padding-left: 25px; /* Indentasi untuk bullet */
+    list-style: disc;
+    padding-left: 25px;
     font-size: 1.1rem;
     color: var(--text-color);
 }
@@ -733,14 +734,12 @@ header nav ul li a:hover {
 }
 
 
-/* --- Contact Section --- */
+/* Contact Section */
 .contact-section {
     background-color: var(--background-color);
     padding: 80px 0;
     text-align: center;
-    padding-top: 100px; /* Offset untuk fixed header */
 }
-
 .contact-section h2 {
     font-size: 3rem;
     margin-bottom: 50px;
@@ -758,7 +757,6 @@ header nav ul li a:hover {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
-
 .contact-form {
     max-width: 650px;
     margin: 0 auto;
@@ -768,11 +766,9 @@ header nav ul li a:hover {
     box-shadow: 0 8px 20px var(--shadow-light);
     text-align: left;
 }
-
 .form-group {
     margin-bottom: 25px;
 }
-
 .form-group label {
     display: block;
     margin-bottom: 10px;
@@ -780,7 +776,6 @@ header nav ul li a:hover {
     color: var(--text-color);
     font-size: 1.1rem;
 }
-
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="password"],
@@ -793,19 +788,16 @@ header nav ul li a:hover {
     color: var(--text-color);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     outline: none;
 }
-
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
 }
-
 .contact-form .btn {
     width: auto;
     padding: 15px 40px;
@@ -815,7 +807,7 @@ header nav ul li a:hover {
 }
 
 
-/* --- Footer --- */
+/* Footer */
 footer {
     background-color: #2c3e50;
     color: var(--light-text-color);
@@ -823,16 +815,13 @@ footer {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 footer p {
     margin-bottom: 15px;
     font-size: 0.95rem;
 }
-
 footer .social-links {
     margin-top: 20px;
 }
-
 footer .social-links a {
     color: var(--light-text-color);
     text-decoration: none;
@@ -840,7 +829,6 @@ footer .social-links a {
     font-size: 1.1rem;
     transition: color 0.3s ease, transform 0.2s ease;
 }
-
 footer .social-links a:hover {
     color: var(--primary-color);
     transform: translateY(-3px);
@@ -850,238 +838,94 @@ footer .social-links a:hover {
 /* --- Responsiveness (Media Queries) --- */
 
 /* Header Responsif */
+/* Perubahan utama ada di atas, ini hanya penyesuaian detail */
 @media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
+    /* Header container rules are already above */
 
-    header nav {
-        width: 100%;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        margin-top: 15px; /* Spasi dari logo ke nav di mobile */
-    }
-
-    header nav ul li a {
-        display: block;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Border untuk item menu */
-    }
-    header nav ul li:last-child a {
-        border-bottom: none;
-    }
-
-    .cart-icon {
-        margin-top: 15px;
+    /* Ensure other sections have proper padding after fixed header */
+    .hero-section, .product-carousel-section, .product-listing,
+    .shopping-cart, .auth-section, .about-section, .contact-section {
+        padding-top: 100px; /* Tambahan padding untuk menghindari konten tertutup header saat nav terbuka */
     }
 }
 
 
-/* Hero Section Responsif */
+/* Sisa Media Queries tetap sama */
 @media (max-width: 992px) {
-    .hero-section {
-        height: 500px;
-    }
-    .hero-section h1 {
-        font-size: 3.5rem;
-    }
-    .hero-section p {
-        font-size: 1.3rem;
-    }
+    .hero-section { height: 500px; }
+    .hero-section h1 { font-size: 3.5rem; }
+    .hero-section p { font-size: 1.3rem; }
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        height: 450px;
-    }
-    .hero-section h1 {
-        font-size: 2.8rem;
-    }
-    .hero-section p {
-        font-size: 1.1rem;
-    }
+    .hero-section { height: 450px; }
+    .hero-section h1 { font-size: 2.8rem; }
+    .hero-section p { font-size: 1.1rem; }
 }
 
 @media (max-width: 576px) {
-    .hero-section {
-        height: 400px;
-    }
-    .hero-section h1 {
-        font-size: 2.2rem;
-    }
-    .hero-section p {
-        font-size: 0.95rem;
-        margin-bottom: 30px;
-    }
-    .hero-section .btn {
-        padding: 10px 25px;
-        font-size: 0.9rem;
-    }
-    section {
-        padding: 60px 0; /* Kurangi padding section di mobile */
-    }
-    h2 {
-        font-size: 2rem !important; /* Paksa ukuran h2 lebih kecil */
-    }
-    h2::after {
-        width: 60px !important;
-        height: 3px !important;
-    }
+    .hero-section { height: 400px; }
+    .hero-section h1 { font-size: 2.2rem; }
+    .hero-section p { font-size: 0.95rem; margin-bottom: 30px; }
+    .hero-section .btn { padding: 10px 25px; font-size: 0.9rem; }
+    section { padding: 60px 0; }
+    h2 { font-size: 2rem !important; }
+    h2::after { width: 60px !important; height: 3px !important; }
 }
-
 
 /* Product Carousel Responsif */
 @media (max-width: 768px) {
-    .carousel-item img {
-        max-width: 80%;
-        height: 220px;
-    }
-    .carousel-item h3 {
-        font-size: 1.8rem;
-    }
-    .carousel-item .price {
-        font-size: 1.4rem;
-    }
-    .carousel-btn {
-        padding: 14px;
-        font-size: 1.5rem;
-    }
+    .carousel-item img { max-width: 80%; height: 220px; }
+    .carousel-item h3 { font-size: 1.8rem; }
+    .carousel-item .price { font-size: 1.4rem; }
+    .carousel-btn { padding: 14px; font-size: 1.5rem; }
 }
-
 @media (max-width: 576px) {
-    .carousel-item img {
-        max-width: 90%;
-        height: 180px;
-    }
-    .carousel-item h3 {
-        font-size: 1.5rem;
-    }
-    .carousel-item .price {
-        font-size: 1.2rem;
-    }
-    .carousel-btn {
-        padding: 10px;
-        font-size: 1.2rem;
-    }
-    .dot {
-        height: 10px;
-        width: 10px;
-    }
+    .carousel-item img { max-width: 90%; height: 180px; }
+    .carousel-item h3 { font-size: 1.5rem; }
+    .carousel-item .price { font-size: 1.2rem; }
+    .carousel-btn { padding: 10px; font-size: 1.2rem; }
+    .dot { height: 10px; width: 10px; }
 }
-
 
 /* Product Grid (untuk products.html) Responsif */
 @media (max-width: 768px) {
-    .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 25px;
-    }
-    .product-card h3 {
-        font-size: 1.3rem;
-    }
-    .product-card .price {
-        font-size: 1.1rem;
-    }
-    .product-card img {
-        height: 180px;
-    }
+    .product-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+    .product-card h3 { font-size: 1.3rem; }
+    .product-card .price { font-size: 1.1rem; }
+    .product-card img { height: 180px; }
 }
-
 @media (max-width: 576px) {
-    .product-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .product-card {
-        padding: 20px;
-    }
-    .product-card img {
-        height: 160px;
-    }
-    .product-card .add-to-cart-btn {
-        max-width: 180px;
-        padding: 10px 15px;
-    }
-    .category-filter .filter-btn {
-        padding: 8px 18px;
-        font-size: 0.9rem;
-    }
+    .product-grid { grid-template-columns: 1fr; gap: 20px; }
+    .product-card { padding: 20px; }
+    .product-card img { height: 160px; }
+    .product-card .add-to-cart-btn { max-width: 180px; padding: 10px 15px; }
+    .category-filter .filter-btn { padding: 8px 18px; font-size: 0.9rem; }
 }
 
 /* Shopping Cart Responsif */
 @media (max-width: 768px) {
-    .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        padding: 15px 0;
-    }
-    .cart-item-actions {
-        width: 100%;
-        justify-content: flex-end;
-    }
-    .cart-item-info img {
-        width: 70px;
-        height: 70px;
-    }
-    .cart-item-details h4 {
-        font-size: 1.1rem;
-    }
-    .cart-item-details p {
-        font-size: 1rem;
-    }
-    .item-quantity {
-        width: 60px;
-        padding: 8px;
-    }
-    .remove-item-btn {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-    }
-    .cart-summary {
-        font-size: 1.5rem;
-        padding: 25px;
-    }
-    .cart-summary .btn {
-        padding: 10px 25px;
-        font-size: 1rem;
-        margin-top: 20px;
-        margin-left: 10px;
-    }
+    .cart-item { flex-direction: column; align-items: flex-start; gap: 15px; padding: 15px 0; }
+    .cart-item-actions { width: 100%; justify-content: flex-end; }
+    .cart-item-info img { width: 70px; height: 70px; }
+    .cart-item-details h4 { font-size: 1.1rem; }
+    .cart-item-details p { font-size: 1rem; }
+    .item-quantity { width: 60px; padding: 8px; }
+    .remove-item-btn { padding: 8px 12px; font-size: 0.9rem; }
+    .cart-summary { font-size: 1.5rem; padding: 25px; }
+    .cart-summary .btn { padding: 10px 25px; font-size: 1rem; margin-top: 20px; margin-left: 10px; }
 }
 
 /* Auth/Contact Form Responsif */
 @media (max-width: 768px) {
-    .auth-form, .contact-form {
-        padding: 30px;
-    }
-    .form-group label {
-        font-size: 1rem;
-    }
-    .form-group input,
-    .form-group textarea {
-        padding: 12px;
-        font-size: 0.95rem;
-    }
-    .auth-form .btn, .contact-form .btn {
-        padding: 12px 30px;
-        font-size: 1.1rem;
-    }
+    .auth-form, .contact-form { padding: 30px; }
+    .form-group label { font-size: 1rem; }
+    .form-group input, .form-group textarea { padding: 12px; font-size: 0.95rem; }
+    .auth-form .btn, .contact-form .btn { padding: 12px 30px; font-size: 1.1rem; }
 }
 
 /* Footer Responsif */
 @media (max-width: 576px) {
-    footer {
-        padding: 25px 0;
-    }
-    footer .social-links a {
-        font-size: 1rem;
-        margin: 0 8px;
-    }
+    footer { padding: 25px 0; }
+    footer .social-links a { font-size: 1rem; margin: 0 8px; }
 }
