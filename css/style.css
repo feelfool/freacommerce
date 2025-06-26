@@ -1,6 +1,6 @@
 /* css/style.css */
 
-/* --- Variabel CSS --- (tetap sama) */
+/* --- Variabel CSS --- */
 :root {
     --primary-color: #3498db;
     --secondary-color: #6c757d;
@@ -14,7 +14,7 @@
     --shadow-medium: rgba(0, 0, 0, 0.15);
 }
 
-/* --- Global Styles --- (tetap sama) */
+/* --- Global Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -26,7 +26,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Mencegah scrollbar horizontal yang tidak diinginkan */
 }
 
 .container {
@@ -99,16 +99,12 @@ header {
     background-color: var(--card-background);
     padding: 20px 0;
     box-shadow: 0 2px 15px var(--shadow-medium);
-    position: fixed;
+    position: fixed; /* Membuat header tetap di atas saat scroll */
     width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
-    /* transition: transform 0.3s ease-out, background-color 0.3s ease; */ /* Hapus ini */
 }
-
-/* header.hidden { transform: translateY(-100%); } */ /* Hapus ini */
-
 
 header .container {
     display: flex;
@@ -126,6 +122,7 @@ header .container {
     letter-spacing: 1px;
 }
 
+/* Navbar default desktop */
 header nav ul {
     list-style: none;
     display: flex;
@@ -184,14 +181,14 @@ header nav ul li a:hover {
 
 /* --- Menu Toggle Button (Hamburger) --- */
 .menu-toggle {
-    display: none; /* Default tersembunyi, hanya muncul di mobile */
+    display: none; /* Default tersembunyi di desktop */
     font-size: 1.8rem;
     cursor: pointer;
     color: var(--text-color);
     order: 3; /* Pastikan tombol di paling kanan di mobile */
 }
 
-/* --- Mobile Navigation Styling --- */
+/* --- Mobile Navigation Styling (Media Query) --- */
 @media (max-width: 768px) {
     header .container {
         flex-direction: row; /* Kembali ke row untuk menempatkan logo dan toggle */
@@ -200,34 +197,36 @@ header nav ul li a:hover {
         flex-wrap: nowrap; /* Cegah wrap di container utama header */
     }
 
+    /* Sembunyikan navigasi secara default di mobile */
     header nav {
         order: 4; /* Pindahkan nav ke baris baru, paling bawah */
         flex-basis: 100%; /* Ambil lebar penuh */
         max-height: 0; /* Sembunyikan secara default */
-        overflow: hidden;
+        overflow: hidden; /* Sembunyikan konten yang meluap */
         transition: max-height 0.4s ease-out; /* Animasi buka/tutup */
         background-color: var(--card-background); /* Background untuk nav yang terbuka */
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         border-top: 1px solid var(--border-color);
     }
 
+    /* Tampilkan navigasi saat kelas 'active' ditambahkan oleh JS */
     header nav.active {
-        max-height: 300px; /* Cukup tinggi untuk menampilkan semua link */
+        max-height: 300px; /* Cukup tinggi untuk menampilkan semua link. Sesuaikan jika menu lebih banyak */
     }
 
     header nav ul {
-        flex-direction: column;
-        gap: 0; /* Hapus gap di sini */
+        flex-direction: column; /* Ubah menu menjadi kolom */
+        gap: 0; /* Hapus gap horizontal */
         padding: 15px 0; /* Padding vertikal di dalam nav */
     }
 
     header nav ul li a {
         padding: 12px 20px; /* Padding untuk setiap item menu */
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color); /* Garis pemisah antar item */
         display: block; /* Agar link mengambil lebar penuh */
     }
     header nav ul li:last-child a {
-        border-bottom: none;
+        border-bottom: none; /* Hapus border di item terakhir */
     }
 
     .cart-icon {
@@ -239,10 +238,16 @@ header nav ul li a:hover {
     .menu-toggle {
         display: block; /* Tampilkan tombol toggle di mobile */
     }
+
+    /* Penyesuaian padding untuk mengatasi fixed header saat nav terbuka di mobile */
+    .hero-section, .product-carousel-section, .product-listing,
+    .shopping-cart, .auth-section, .about-section, .contact-section {
+        padding-top: 100px; /* Tambahan padding untuk menghindari konten tertutup header saat nav terbuka */
+    }
 }
 
 
-/* --- Sisa CSS di bawah ini tetap sama seperti sebelumnya --- */
+/* --- Sisa CSS di bawah ini tetap sama seperti sebelumnya (kecuali jika ada penyesuaian dari Anda) --- */
 
 /* Hero Section */
 .hero-section {
@@ -837,20 +842,7 @@ footer .social-links a:hover {
 
 /* --- Responsiveness (Media Queries) --- */
 
-/* Header Responsif */
-/* Perubahan utama ada di atas, ini hanya penyesuaian detail */
-@media (max-width: 768px) {
-    /* Header container rules are already above */
-
-    /* Ensure other sections have proper padding after fixed header */
-    .hero-section, .product-carousel-section, .product-listing,
-    .shopping-cart, .auth-section, .about-section, .contact-section {
-        padding-top: 100px; /* Tambahan padding untuk menghindari konten tertutup header saat nav terbuka */
-    }
-}
-
-
-/* Sisa Media Queries tetap sama */
+/* Header Responsif - Aturan utama ada di atas, ini hanya penyesuaian detail */
 @media (max-width: 992px) {
     .hero-section { height: 500px; }
     .hero-section h1 { font-size: 3.5rem; }
@@ -858,6 +850,7 @@ footer .social-links a:hover {
 }
 
 @media (max-width: 768px) {
+    /* Aturan untuk header nav dan menu-toggle sudah ada di atas */
     .hero-section { height: 450px; }
     .hero-section h1 { font-size: 2.8rem; }
     .hero-section p { font-size: 1.1rem; }

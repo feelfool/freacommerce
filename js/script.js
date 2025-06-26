@@ -79,7 +79,7 @@ const carouselDotsContainer = document.getElementById('carousel-dots');
 // ELEMEN DOM UNTUK FORM AUTENTIKASI (login.html, signup.html)
 const authForm = document.querySelector('.auth-form');
 
-// ELEMEN DOM UNTUK MENU TOGGLE (BARU)
+// ELEMEN DOM UNTUK MENU TOGGLE
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
 
@@ -133,8 +133,8 @@ function addToCart(event) {
 // 3. Memperbarui Tampilan Keranjang dan Local Storage
 function updateCart() {
     localStorage.setItem('ecommerceCart', JSON.stringify(cart));
-    renderCartItems();
-    updateCartTotal();
+    renderCartItems(); // Akan berjalan hanya jika cartItemsContainer ada di halaman
+    updateCartTotal(); // Akan berjalan hanya jika cartTotalElement ada di halaman
     updateCartItemCount();
 }
 
@@ -192,6 +192,7 @@ function updateQuantity(event) {
         if (newQuantity > 0) {
             itemToUpdate.quantity = newQuantity;
         } else {
+            // Jika kuantitas 0 atau kurang, hapus item
             removeFromCart({ target: { dataset: { itemId: itemId } } });
         }
         updateCart();
@@ -243,6 +244,11 @@ function handleCheckout() {
 
 // --- Fungsionalitas KATEGORI (Hanya untuk products.html) ---
 function filterProducts(event) {
+    // Pastikan event.target adalah tombol dengan kelas 'filter-btn'
+    if (!event.target.classList.contains('filter-btn')) {
+        return;
+    }
+
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -262,6 +268,7 @@ function filterProducts(event) {
 
 
 // --- Fungsionalitas LOGIN / SIGNUP (Simulasi) ---
+// Blok ini akan dijalankan hanya jika authForm elemen ditemukan di halaman
 if (authForm) {
     authForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -273,6 +280,7 @@ if (authForm) {
             const emailInput = document.getElementById('login-email');
             const passwordInput = document.getElementById('login-password');
 
+            // Cek apakah elemen input ditemukan sebelum mengakses value
             if (!emailInput || !passwordInput) {
                 console.error("Elemen input email atau password tidak ditemukan di login.html");
                 return;
@@ -281,9 +289,10 @@ if (authForm) {
             const email = emailInput.value;
             const password = passwordInput.value;
 
+            // Simulasi login
             if (email === 'user@example.com' && password === 'password123') {
                 alert('Login berhasil! Selamat datang.');
-                window.location.href = 'index.html';
+                window.location.href = 'index.html'; // Redirect ke halaman beranda
             } else {
                 alert('Email atau password salah.');
             }
@@ -294,6 +303,7 @@ if (authForm) {
             const passwordInput = document.getElementById('signup-password');
             const confirmPasswordInput = document.getElementById('signup-confirm-password');
 
+            // Cek apakah elemen input ditemukan
             if (!nameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
                 console.error("Satu atau lebih elemen input signup tidak ditemukan di signup.html");
                 return;
@@ -308,9 +318,9 @@ if (authForm) {
                 alert('Konfirmasi password tidak cocok!');
                 return;
             }
-            if (name && email && password) {
+            if (name && email && password) { // Cek input tidak kosong
                 alert(`Akun untuk ${name} berhasil dibuat! Silakan login.`);
-                window.location.href = 'login.html';
+                window.location.href = 'login.html'; // Redirect ke halaman login
             } else {
                 alert('Semua kolom harus diisi.');
             }
@@ -321,63 +331,65 @@ if (authForm) {
 // --- Fungsionalitas CAROUSEL (Hanya untuk index.html) ---
 let currentSlide = 0;
 let autoSlideInterval;
-const slideIntervalTime = 5000;
+const slideIntervalTime = 5000; // Ganti interval slide (5 detik)
 
 function renderCarouselItems() {
-    if (productCarouselSlide) {
-        productCarouselSlide.innerHTML = '';
-        products.forEach((product, index) => {
-            const carouselItem = document.createElement('div');
-            carouselItem.classList.add('carousel-item');
-            carouselItem.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p class="price">Rp ${product.price.toLocaleString('id-ID')}</p>
-                <button class="add-to-cart-btn" data-product-id="${product.id}">Tambah ke Keranjang</button>
-            `;
-            productCarouselSlide.appendChild(carouselItem);
-        });
+    if (!productCarouselSlide || products.length === 0) return; // Pastikan elemen dan data produk ada
 
-        productCarouselSlide.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', addToCart);
-        });
+    productCarouselSlide.innerHTML = '';
+    products.forEach((product, index) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        carouselItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p class="price">Rp ${product.price.toLocaleString('id-ID')}</p>
+            <button class="add-to-cart-btn" data-product-id="${product.id}">Tambah ke Keranjang</button>
+        `;
+        productCarouselSlide.appendChild(carouselItem);
+    });
 
-        renderCarouselDots();
-        showSlide(currentSlide);
-        startAutoSlide();
-    }
+    // Tambahkan event listener untuk tombol "Tambah ke Keranjang" di carousel
+    productCarouselSlide.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', addToCart);
+    });
+
+    renderCarouselDots();
+    showSlide(currentSlide);
+    startAutoSlide(); // Mulai auto-slide setelah rendering
 }
 
 function renderCarouselDots() {
-    if (carouselDotsContainer) {
-        carouselDotsContainer.innerHTML = '';
-        for (let i = 0; i < products.length; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            dot.dataset.slideIndex = i;
-            dot.addEventListener('click', () => {
-                showSlide(i);
-                resetAutoSlide();
-            });
-            carouselDotsContainer.appendChild(dot);
-        }
+    if (!carouselDotsContainer || products.length === 0) return; // Pastikan elemen dan data produk ada
+
+    carouselDotsContainer.innerHTML = '';
+    for (let i = 0; i < products.length; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.dataset.slideIndex = i; // Untuk identifikasi dot
+        dot.addEventListener('click', () => {
+            showSlide(i);
+            resetAutoSlide(); // Reset auto-slide saat dot diklik
+        });
+        carouselDotsContainer.appendChild(dot);
     }
 }
 
 function showSlide(index) {
-    if (!productCarouselSlide || !carouselDotsContainer) return;
+    if (!productCarouselSlide || !carouselDotsContainer || products.length === 0) return;
 
     if (index >= products.length) {
-        currentSlide = 0;
+        currentSlide = 0; // Kembali ke slide pertama jika sudah di akhir
     } else if (index < 0) {
-        currentSlide = products.length - 1;
+        currentSlide = products.length - 1; // Kembali ke slide terakhir jika sudah di awal
     } else {
         currentSlide = index;
     }
 
-    const offset = -currentSlide * 100;
+    const offset = -currentSlide * 100; // Hitung offset untuk transformasi
     productCarouselSlide.style.transform = `translateX(${offset}%)`;
 
+    // Perbarui status dot aktif
     const dots = carouselDotsContainer.querySelectorAll('.dot');
     dots.forEach((dot, idx) => {
         if (idx === currentSlide) {
@@ -397,7 +409,7 @@ function prevSlide() {
 }
 
 function startAutoSlide() {
-    stopAutoSlide();
+    stopAutoSlide(); // Pastikan tidak ada interval sebelumnya yang berjalan
     autoSlideInterval = setInterval(nextSlide, slideIntervalTime);
 }
 
@@ -411,11 +423,11 @@ function resetAutoSlide() {
 }
 
 
-// --- Fungsionalitas MENU TOGGLE (BARU) ---
-if (menuToggle && mainNav) { // Pastikan kedua elemen ditemukan
+// --- Fungsionalitas MENU TOGGLE ---
+if (menuToggle && mainNav) { // Pastikan kedua elemen ditemukan sebelum menambahkan event listener
     menuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active'); // Toggle kelas 'active' pada nav
-        // Opsional: Ubah ikon hamburger menjadi 'X' dan sebaliknya
+        mainNav.classList.toggle('active'); // Menambahkan atau menghapus kelas 'active'
+        // Ubah ikon hamburger menjadi 'X' dan sebaliknya
         if (mainNav.classList.contains('active')) {
             menuToggle.querySelector('i').classList.replace('fa-bars', 'fa-times');
         } else {
@@ -423,10 +435,11 @@ if (menuToggle && mainNav) { // Pastikan kedua elemen ditemukan
         }
     });
 
-    // Opsional: Tutup menu saat link navigasi diklik (hanya di mobile)
+    // Tutup menu saat link navigasi diklik (opsional, tapi disarankan untuk UX mobile)
     mainNav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) { // Hanya tutup di tampilan mobile
+            // Hanya tutup jika menu aktif dan di tampilan mobile
+            if (mainNav.classList.contains('active') && window.innerWidth <= 768) {
                 mainNav.classList.remove('active');
                 menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
             }
@@ -440,10 +453,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname;
     const fileName = currentPath.split('/').pop();
 
+    // Ini dipanggil di semua halaman untuk memperbarui jumlah item di keranjang header
     updateCartItemCount();
 
+    // Inisialisasi spesifik untuk halaman index.html
     if (fileName === 'index.html' || fileName === '') {
         renderCarouselItems();
+        // Hanya tambahkan event listener jika tombol ada
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 prevSlide();
@@ -457,20 +473,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+    // Inisialisasi spesifik untuk halaman products.html
     else if (fileName === 'products.html') {
         if (productGrid) {
             renderProducts(productGrid, products);
         }
         if (categoryFilterContainer) {
-            categoryFilterContainer.addEventListener('click', (event) => {
-                if (event.target.classList.contains('filter-btn')) {
-                    filterProducts(event);
-                }
-            });
+            categoryFilterContainer.addEventListener('click', filterProducts); // Event listener untuk filter kategori
         }
     }
+    // Inisialisasi spesifik untuk halaman cart.html
     else if (fileName === 'cart.html') {
-        renderCartItems();
+        renderCartItems(); // Memanggil renderCartItems untuk menampilkan isi keranjang
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', handleCheckout);
         }
@@ -479,5 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Panggil updateCart setelah semua inisialisasi awal selesai,
+    // ini memastikan data keranjang dimuat dan tampilan diperbarui
     updateCart();
 });
