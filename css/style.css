@@ -88,10 +88,17 @@ h1, h2, h3, h4, h5, h6 {
 header {
     background-color: var(--card-background);
     padding: 20px 0;
-    box-shadow: 0 2px 15px var(--shadow-medium); /* Bayangan lebih jelas */
-    position: sticky;
+    box-shadow: 0 2px 15px var(--shadow-medium);
+    position: fixed; /* Ubah dari 'sticky' menjadi 'fixed' */
+    width: 100%; /* Penting untuk fixed header */
     top: 0;
+    left: 0;
     z-index: 1000;
+    transition: transform 0.3s ease-out, background-color 0.3s ease; /* Tambahkan transisi untuk transform */
+}
+
+header.hidden { /* Kelas baru untuk menyembunyikan header */
+    transform: translateY(-100%); /* Geser ke atas sejauh 100% tinggi header */
 }
 
 header .container {
@@ -180,6 +187,9 @@ header nav ul li a:hover {
     padding: 20px;
     position: relative; /* Penting untuk efek parallax/animasi */
     overflow: hidden; /* Pastikan tidak ada konten yang tumpah */
+    /* Tambahan untuk mengatasi fixed header di awal halaman */
+    margin-top: -85px; /* Sesuaikan dengan tinggi header + padding atas/bawah header */
+    padding-top: 85px; /* Offset padding untuk konten di bawah header */
 }
 
 .hero-section::before { /* Untuk efek overlay tambahan / tekstur */
@@ -359,7 +369,10 @@ header nav ul li a:hover {
 .product-listing {
     padding: 80px 0;
     background-color: var(--background-color);
+    /* Tambahan untuk mengatasi fixed header di halaman products.html */
+    padding-top: 100px; /* Lebih besar dari header untuk aman */
 }
+
 
 .product-listing h2 {
     text-align: center;
@@ -483,6 +496,8 @@ header nav ul li a:hover {
 .shopping-cart {
     padding: 80px 0;
     background-color: var(--background-color);
+    /* Tambahan untuk mengatasi fixed header di halaman cart.html */
+    padding-top: 100px; /* Lebih besar dari header untuk aman */
 }
 
 .shopping-cart h2 {
@@ -618,6 +633,8 @@ header nav ul li a:hover {
     padding: 80px 0;
     text-align: center;
     box-shadow: 0 2px 15px var(--shadow-light);
+    /* Tambahan untuk mengatasi fixed header di halaman about.html jika ada */
+    padding-top: 100px;
 }
 
 .about-section h2 {
@@ -652,6 +669,8 @@ header nav ul li a:hover {
     background-color: var(--background-color);
     padding: 80px 0;
     text-align: center;
+    /* Tambahan untuk mengatasi fixed header di halaman contact.html jika ada */
+    padding-top: 100px;
 }
 
 .contact-section h2 {

@@ -105,7 +105,7 @@ function renderProducts(targetGridElement, productsToRender) {
     }
 }
 
-// 2. Menambah Produk ke Keranjang (TETAP SAMA)
+// 2. Menambah Produk ke Keranjang
 function addToCart(event) {
     const productId = parseInt(event.target.dataset.productId);
     const productToAdd = products.find(product => product.id === productId);
@@ -123,7 +123,7 @@ function addToCart(event) {
     }
 }
 
-// 3. Memperbarui Tampilan Keranjang dan Local Storage (TETAP SAMA)
+// 3. Memperbarui Tampilan Keranjang dan Local Storage
 function updateCart() {
     localStorage.setItem('ecommerceCart', JSON.stringify(cart));
     renderCartItems();
@@ -131,7 +131,7 @@ function updateCart() {
     updateCartItemCount();
 }
 
-// 4. Render Item di Keranjang Belanja (TETAP SAMA)
+// 4. Render Item di Keranjang Belanja
 function renderCartItems() {
     if (cartItemsContainer) {
         cartItemsContainer.innerHTML = '';
@@ -175,7 +175,7 @@ function renderCartItems() {
     }
 }
 
-// 5. Memperbarui Kuantitas Item di Keranjang (TETAP SAMA)
+// 5. Memperbarui Kuantitas Item di Keranjang
 function updateQuantity(event) {
     const itemId = parseInt(event.target.dataset.itemId);
     const newQuantity = parseInt(event.target.value);
@@ -189,14 +189,14 @@ function updateQuantity(event) {
     }
 }
 
-// 6. Menghapus Item dari Keranjang (TETAP SAMA)
+// 6. Menghapus Item dari Keranjang
 function removeFromCart(event) {
     const itemId = parseInt(event.target.dataset.itemId);
     cart = cart.filter(item => item.id !== itemId);
     updateCart();
 }
 
-// 7. Memperbarui Total Harga Keranjang (TETAP SAMA)
+// 7. Memperbarui Total Harga Keranjang
 function updateCartTotal() {
     if (cartTotalElement) {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -204,7 +204,7 @@ function updateCartTotal() {
     }
 }
 
-// 8. Memperbarui Jumlah Item di Ikon Keranjang (Header) (TETAP SAMA)
+// 8. Memperbarui Jumlah Item di Ikon Keranjang (Header)
 function updateCartItemCount() {
     if (cartItemCount) {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -212,7 +212,7 @@ function updateCartItemCount() {
     }
 }
 
-// 9. Membersihkan Seluruh Keranjang (TETAP SAMA)
+// 9. Membersihkan Seluruh Keranjang
 function clearCart() {
     if (confirm('Apakah Anda yakin ingin mengosongkan keranjang belanja?')) {
         cart = [];
@@ -220,7 +220,7 @@ function clearCart() {
     }
 }
 
-// 10. Fungsi untuk Checkout (Simulasi) (TETAP SAMA)
+// 10. Fungsi untuk Checkout (Simulasi)
 function handleCheckout() {
     if (cart.length === 0) {
         alert('Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.');
@@ -232,7 +232,7 @@ function handleCheckout() {
     updateCart();
 }
 
-// --- Fungsionalitas KATEGORI (TETAP SAMA) ---
+// --- Fungsionalitas KATEGORI ---
 function filterProducts(event) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -252,7 +252,7 @@ function filterProducts(event) {
 }
 
 
-// --- Fungsionalitas LOGIN / SIGNUP (Simulasi) (TETAP SAMA) ---
+// --- Fungsionalitas LOGIN / SIGNUP (Simulasi) ---
 const authForm = document.querySelector('.auth-form');
 
 if (authForm) {
@@ -311,7 +311,7 @@ if (authForm) {
     });
 }
 
-// --- Fungsionalitas CAROUSEL (BARU/DIREVISI) ---
+// --- Fungsionalitas CAROUSEL ---
 let currentSlide = 0;
 let autoSlideInterval;
 const slideIntervalTime = 5000; // Ganti setiap 5 detik
@@ -407,6 +407,42 @@ function resetAutoSlide() {
 }
 
 
+// --- Fungsionalitas HIDE ON SCROLL NAVBAR (BARU) ---
+let lastScrollY = window.scrollY;
+const header = document.querySelector('header');
+// Ambil tinggi header setelah CSS dimuat dan elemen terbentuk
+let headerHeight = 0;
+if (header) {
+    // Gunakan MutationObserver untuk mendeteksi perubahan tinggi header (misal, saat di mobile berubah layout)
+    // Atau bisa juga hitung saat DOMContentLoaded
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            if (entry.target === header) {
+                headerHeight = entry.contentRect.height;
+            }
+        }
+    });
+    resizeObserver.observe(header);
+}
+
+
+if (header) {
+    window.addEventListener('scroll', () => {
+        // Hanya jalankan jika headerHeight sudah terdeteksi (tidak 0)
+        if (headerHeight === 0) return;
+
+        // Jika scroll ke bawah DAN posisi scroll sudah melewati tinggi header
+        if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
+            header.classList.add('hidden');
+        } else {
+            // Jika scroll ke atas, atau di bagian paling atas halaman (di bawah tinggi header)
+            header.classList.remove('hidden');
+        }
+        lastScrollY = window.scrollY; // Update posisi scroll terakhir
+    });
+}
+
+
 // --- EVENT LISTENERS GLOBAL ---
 if (checkoutBtn) {
     checkoutBtn.addEventListener('click', handleCheckout);
@@ -442,13 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileName = currentPath.split('/').pop();
 
     if (fileName === 'products.html') {
-        // Render semua produk ke productGrid di products.html
         if (productGrid) {
             renderProducts(productGrid, products);
         }
     } else if (fileName === 'index.html' || fileName === '') {
-        // Render carousel produk unggulan di index.html
         renderCarouselItems();
+    } else if (fileName === 'cart.html') {
+        renderCartItems(); // Pastikan cart items dirender di halaman cart.html
     }
     // Update keranjang dan hitungan item di header selalu dijalankan di semua halaman
     updateCart();
