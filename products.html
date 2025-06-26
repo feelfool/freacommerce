@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - Freaco</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Freaco</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="products.html">Produk</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Daftar</a></li>
+                    <li><a href="cart.html">Keranjang</a></li> </ul>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">🛒 <span id="cart-item-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="products" class="product-listing">
+            <div class="container">
+                <h2>Semua Produk Kami</h2>
+
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">Semua Produk</button>
+                    <button class="filter-btn" data-category="Pakaian">Pakaian</button>
+                    <button class="filter-btn" data-category="Aksesoris">Aksesoris</button>
+                    </div>
+
+                <div class="product-grid" id="product-grid">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nama Toko Anda. Semua Hak Dilindungi.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

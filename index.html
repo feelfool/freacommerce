@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freaco</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Freaco</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="products.html">Produk</a></li> <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Daftar</a></li>
+                    <li><a href="cart.html">Keranjang</a></li> </ul>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">🛒 <span id="cart-item-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Temukan Gaya Anda, Ekspresikan Diri Anda!</h1>
+                <p>Koleksi terbaru fesyen pria dan wanita siap mempercantik harimu.</p>
+                <a href="products.html" class="btn primary-btn">Belanja Sekarang</a> </div>
+        </section>
+
+        <section id="product-carousel-section" class="product-carousel-section">
+            <div class="container">
+                <h2>Produk Unggulan</h2>
+                <div class="carousel-container">
+                    <div class="carousel-slide" id="product-carousel-slide">
+                        <p>Memuat produk unggulan...</p> </div>
+                    <button class="carousel-btn prev-btn">&#10094;</button> <button class="carousel-btn next-btn">&#10095;</button> </div>
+                <div class="carousel-dots" id="carousel-dots">
+                    </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="products.html" class="btn secondary-btn">Lihat Semua Produk</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-us" class="about-section">
+            <div class="container">
+                <h2>Tentang Kami</h2>
+                <p>Nama Toko Anda berkomitmen untuk menyediakan pakaian dan aksesoris berkualitas tinggi dengan desain terkini. Kami percaya bahwa setiap individu berhak untuk tampil stylish dan percaya diri.</p>
+                <p>Dengan fokus pada kepuasan pelanggan, kami selalu berusaha menghadirkan koleksi terbaik dan pengalaman berbelanja yang menyenangkan.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Hubungi Kami</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nama:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Kirim Pesan</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nama Toko Anda. Semua Hak Dilindungi.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

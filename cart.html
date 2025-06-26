@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cart - Freaco</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Freaco</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="products.html">Produk</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Daftar</a></li>
+                    <li><a href="cart.html">Keranjang</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">🛒 <span id="cart-item-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="cart" class="shopping-cart">
+            <div class="container">
+                <h2>Keranjang Belanja Anda</h2>
+                <div id="cart-items">
+                    <p id="empty-cart-message" style="display: none;">Keranjang Anda masih kosong.</p>
+                    </div>
+                <div class="cart-summary">
+                    Total: <span id="cart-total">Rp 0</span>
+                </div>
+                <div style="text-align: right; margin-top: 20px;">
+                    <button id="checkout-btn" class="btn primary-btn" disabled>Checkout</button>
+                    <button id="clear-cart-btn" class="btn secondary-btn" disabled>Bersihkan Keranjang</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nama Toko Anda. Semua Hak Dilindungi.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
