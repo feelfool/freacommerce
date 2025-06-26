@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freaco E-Commerce</title>
+    <title>Freaco E-Commerce - Keranjang Belanja</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40jHzQjC6X9wib5vR5c55Z3q4l+Lg+C4Z0Fj7W9v2sF7Q9N6g/vQ7W7u5j3x5J7W8d4P5A4G5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,7 +17,8 @@
             <div class="menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
-            <nav id="main-nav"> <ul>
+            <nav id="main-nav">
+                <ul>
                     <li><a href="index.html">Beranda</a></li>
                     <li><a href="products.html">Produk</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -41,13 +42,14 @@
                 <h2>Keranjang Belanja Anda</h2>
 
                 <div class="cart-items" id="cart-items">
-                    <p id="empty-cart-message" style="display: none;">Keranjang Anda masih kosong.</p>
-                </div>
+                    </div>
+
+                <p id="empty-cart-message" style="display: none;">Keranjang Anda masih kosong. Ayo, belanja sekarang!</p>
 
                 <div class="cart-summary">
                     Total: <span id="cart-total">Rp 0</span>
-                    <button class="btn primary-btn" id="checkout-btn">Checkout</button>
-                    <button class="btn secondary-btn" id="clear-cart-btn">Bersihkan Keranjang</button>
+                    <button class="btn primary-btn" id="checkout-btn" disabled>Checkout</button>
+                    <button class="btn secondary-btn" id="clear-cart-btn" disabled>Bersihkan Keranjang</button>
                 </div>
             </div>
         </section>
@@ -55,7 +57,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Freaco E-Commerce. All rights reserved.</p>
+            <p>&copy; 2025 FREACO. All rights reserved.</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>

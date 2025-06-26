@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freaco E-Commerce</title>
+    <title>Freaco E-Commerce - Beranda</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40jHzQjC6X9wib5vR5c55Z3q4l+Lg+C4Z0Fj7W9v2sF7Q9N6g/vQ7W7u5j3x5J7W8d4P5A4G5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -39,12 +39,12 @@
         <section class="hero-section">
             <div class="container">
                 <h1>Temukan Gaya Anda, Ekspresikan Diri Anda!</h1>
-                <p>Koleksi terbaru fashion pria dan wanita siap mempercantik harimu.</p>
+                <p>Koleksi terbaru fesyen pria dan wanita siap mempercantik harimu.</p>
                 <a href="products.html" class="btn primary-btn">Belanja Sekarang</a>
             </div>
         </section>
 
-        <section class="product-carousel-section">
+        <section id="product-carousel-section" class="product-carousel-section">
             <div class="container">
                 <h2>Produk Unggulan</h2>
                 <div class="carousel-container">
@@ -52,26 +52,53 @@
                         </div>
                     <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                    <div class="carousel-dots" id="carousel-dots">
-                        </div>
                 </div>
+                <div class="carousel-dots" id="carousel-dots">
+                    </div>
             </div>
         </section>
 
-        <section class="about-section">
+        <section id="about-us" class="about-section">
             <div class="container">
-                <h2>Siapa Kami</h2>
-                <p>Freaco E-Commerce adalah destinasi utama Anda untuk fashion pria dan wanita yang stylish dan berkualitas. Kami berkomitmen untuk menyediakan koleksi terbaik yang mencerminkan tren terkini dan memenuhi kebutuhan gaya hidup modern Anda.</p>
-                <p>Misi kami adalah membuat berbelanja fashion menjadi pengalaman yang menyenangkan dan mudah, dengan penawaran produk yang beragam dan pelayanan pelanggan yang prima.</p>
-                <a href="about.html" class="btn secondary-btn">Pelajari Lebih Lanjut</a>
+                <h2>Tentang Kami</h2>
+                <p>Freaco adalah toko online terkemuka yang menyediakan fashion pria dan wanita terkini. Kami berkomitmen untuk menghadirkan produk berkualitas tinggi dengan desain modern yang sesuai dengan gaya hidup Anda.</p>
+                <p>Misi kami adalah memberikan pengalaman berbelanja yang mudah dan menyenangkan, dengan koleksi yang selalu diperbarui agar Anda selalu tampil trendi. Dari pakaian kasual hingga aksesoris statement, kami memiliki semuanya untuk melengkapi penampilan Anda.</p>
+                <ul>
+                    <li>Kualitas Produk Terjamin</li>
+                    <li>Desain Trendy dan Up-to-Date</li>
+                    <li>Harga Kompetitif</li>
+                    <li>Pelayanan Pelanggan Terbaik</li>
+                    <li>Pengiriman Cepat dan Aman</li>
+                </ul>
+                <a href="products.html" class="btn primary-btn">Lihat Koleksi Kami</a>
             </div>
         </section>
 
+        <section id="contact-us" class="contact-section">
+            <div class="container">
+                <h2>Hubungi Kami</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Anda</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan Anda</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Kirim Pesan</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Freaco E-Commerce. All rights reserved.</p>
+            <p>&copy; 2025 FREACO. All rights reserved.</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
