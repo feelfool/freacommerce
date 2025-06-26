@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freaco E-Commerce</title>
+    <title>Kontak - Freaco E-Commerce</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,37 +35,31 @@
     </header>
 
     <main>
-        <section class="hero-section">
+        <section class="contact-section">
             <div class="container">
-                <h1>Temukan Gaya Anda, Ekspresikan Diri Anda!</h1>
-                <p>Koleksi terbaru fashion pria dan wanita siap mempercantik harimu.</p>
-                <a href="products.html" class="btn primary-btn">Belanja Sekarang</a>
+                <h2>Hubungi Kami</h2>
+                <p>Ada pertanyaan, saran, atau butuh bantuan? Jangan ragu untuk menghubungi tim kami!</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Anda:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subjek:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan Anda:</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Kirim Pesan</button>
+                </form>
             </div>
         </section>
-
-        <section class="product-carousel-section">
-            <div class="container">
-                <h2>Produk Unggulan</h2>
-                <div class="carousel-container">
-                    <div class="carousel-slide" id="product-carousel-slide">
-                        </div>
-                    <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                    <div class="carousel-dots" id="carousel-dots">
-                        </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <div class="container">
-                <h2>Siapa Kami</h2>
-                <p>Freaco E-Commerce adalah destinasi utama Anda untuk fashion pria dan wanita yang stylish dan berkualitas. Kami berkomitmen untuk menyediakan koleksi terbaik yang mencerminkan tren terkini dan memenuhi kebutuhan gaya hidup modern Anda.</p>
-                <p>Misi kami adalah membuat berbelanja fashion menjadi pengalaman yang menyenangkan dan mudah, dengan penawaran produk yang beragam dan pelayanan pelanggan yang prima.</p>
-                <a href="about.html" class="btn secondary-btn">Pelajari Lebih Lanjut</a>
-            </div>
-        </section>
-
     </main>
 
     <footer>

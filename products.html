@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product - Freaco</title>
+    <title>Produk - Freaco E-Commerce</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html">Freaco</a>
+                <a href="index.html">FREACO</a>
             </div>
             <nav>
                 <ul>
@@ -19,21 +21,26 @@
                     <li><a href="products.html">Produk</a></li>
                     <li><a href="login.html">Login</a></li>
                     <li><a href="signup.html">Daftar</a></li>
-                    <li><a href="cart.html">Keranjang</a></li> </ul>
+                    <li><a href="about.html">Tentang Kami</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
             </nav>
             <div class="cart-icon">
-                <a href="cart.html">🛒 <span id="cart-item-count">0</span></a>
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-item-count">0</span>
+                </a>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="products" class="product-listing">
+        <section class="product-listing">
             <div class="container">
                 <h2>Semua Produk Kami</h2>
 
                 <div class="category-filter">
-                    <button class="filter-btn active" data-category="all">Semua Produk</button>
+                    <button class="filter-btn active" data-category="all">Semua</button>
                     <button class="filter-btn" data-category="Pakaian">Pakaian</button>
                     <button class="filter-btn" data-category="Aksesoris">Aksesoris</button>
                     </div>
@@ -46,11 +53,12 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Nama Toko Anda. Semua Hak Dilindungi.</p>
+            <p>&copy; 2025 Freaco E-Commerce. All rights reserved.</p>
             <div class="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">Twitter</a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </footer>
